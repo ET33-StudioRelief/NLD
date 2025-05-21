@@ -1,7 +1,17 @@
-import { greetUser } from '$utils/greet';
+import './index.css';
 
-window.Webflow ||= [];
-window.Webflow.push(() => {
-  const name = 'John Doe';
-  greetUser(name);
-});
+import {
+  animateAbout,
+  animateCTA,
+  animateFeatures,
+  animateHeroGrid,
+  animateNavbar,
+} from './animation';
+
+window.onload = () => {
+  animateHeroGrid();
+  animateNavbar();
+  animateFeatures();
+  animateAbout();
+  animateCTA();
+};
