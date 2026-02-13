@@ -240,36 +240,3 @@ export function animateAbout() {
     observerTestimonial.observe(testimonialSection);
   }
 }
-
-export function animateCTA() {
-  const ctaSection = document.querySelector('.section_cta');
-
-  if (ctaSection) {
-    const observerCTA = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            gsap.fromTo(
-              ctaSection,
-              {
-                opacity: 0,
-                x: 400,
-              },
-              {
-                opacity: 1,
-                x: 0,
-                duration: 1,
-                ease: 'power3.out',
-              }
-            );
-          }
-        });
-      },
-      {
-        threshold: 0.2,
-      }
-    );
-
-    observerCTA.observe(ctaSection);
-  }
-}

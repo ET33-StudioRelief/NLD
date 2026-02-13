@@ -2,7 +2,6 @@ import './index.css';
 
 import {
   animateAbout,
-  animateCTA,
   animateFeatures,
   animateHeroGrid,
   animateHeroIntro,
@@ -10,12 +9,12 @@ import {
   initFadeInOnScroll,
 } from './animation';
 
-window.onload = () => {
+window.Webflow ||= [];
+window.Webflow.push(() => {
   animateHeroGrid();
   animateNavbar();
   animateFeatures();
   animateAbout();
-  animateCTA();
   initFadeInOnScroll();
   animateHeroIntro();
-};
+});
