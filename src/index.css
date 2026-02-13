@@ -1,0 +1,20 @@
+/* Fade-in on scroll for elements with trigger="fade-in" */
+[trigger='fade-in'] {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+[trigger='fade-in'].is-in-view {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,7 +1,64 @@
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import { gsap } from 'gsap';
 
-gsap.registerPlugin(ScrollTrigger);
+// CSS fade-in (trigger="fade-in") when entering viewport
+export function initFadeInOnScroll() {
+  const elements = document.querySelectorAll<HTMLElement>('[trigger="fade-in"]');
+
+  if (!elements.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const el = entry.target as HTMLElement;
+        if (entry.isIntersecting) {
+          el.classList.add('is-in-view');
+        } else {
+          el.classList.remove('is-in-view');
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+    }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+}
+
+export function animateHeroIntro() {
+  const navbar = document.querySelector('#navbar');
+  const heroHeading = document.querySelector('[trigger="hero-heading"]');
+  const heroCta = document.querySelector('[trigger="hero-cta"]');
+
+  const tl = gsap.timeline();
+
+  if (navbar) {
+    tl.from(navbar, {
+      y: -80,
+      opacity: 0,
+      duration: 0.6,
+      ease: 'power3.out',
+    });
+  }
+
+  if (heroHeading) {
+    tl.from(heroHeading, {
+      y: 40,
+      opacity: 0,
+      duration: 0.7,
+      ease: 'power3.out',
+    });
+  }
+
+  if (heroCta) {
+    tl.from(heroCta, {
+      y: 40,
+      opacity: 0,
+      duration: 0.7,
+      ease: 'power3.out',
+    });
+  }
+}
 
 export function animateHeroGrid() {
   const heroGrid = document.querySelector('.hero_grid');
@@ -62,22 +119,31 @@ export function animateFeatures() {
   const featuresSection = document.querySelector('.section_features');
 
   if (featuresGrid && featuresSection) {
-    gsap.fromTo(
-      featuresGrid.children,
-      { opacity: 0, y: 30 },
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(
+              featuresGrid.children,
+              { opacity: 0, y: 30 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power.out',
+                clearProps: 'opacity,transform',
+              }
+            );
+          }
+        });
+      },
       {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: 'power.out',
-        scrollTrigger: {
-          trigger: featuresSection,
-          start: 'top 60%',
-          toggleActions: 'play none none reverse',
-        },
+        threshold: 0.2,
       }
     );
+
+    observer.observe(featuresSection);
   }
 
   // Animation pour les FAQs
@@ -85,22 +151,31 @@ export function animateFeatures() {
   const faqSection = document.querySelector('.section_faq');
 
   if (faqList && faqSection) {
-    gsap.fromTo(
-      faqList.children,
-      { opacity: 0, y: 30 },
+    const observerFaq = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(
+              faqList.children,
+              { opacity: 0, y: 30 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.2,
+                ease: 'power.out',
+                clearProps: 'opacity,transform',
+              }
+            );
+          }
+        });
+      },
       {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.2,
-        ease: 'power.out',
-        scrollTrigger: {
-          trigger: faqSection,
-          start: 'top 60%',
-          toggleActions: 'play none none reverse',
-        },
+        threshold: 0.2,
       }
     );
+
+    observerFaq.observe(faqSection);
   }
 }
 
@@ -110,21 +185,29 @@ export function animateAbout() {
   const aboutSection = document.querySelector('.section_about');
 
   if (aboutContent && aboutSection) {
-    gsap.fromTo(
-      aboutContent,
-      { opacity: 0, y: 50 },
+    const observerAbout = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(
+              aboutContent,
+              { opacity: 0, y: 50 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power3.out',
+              }
+            );
+          }
+        });
+      },
       {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: aboutSection,
-          start: 'top 60%',
-          toggleActions: 'play none none reverse',
-        },
+        threshold: 0.2,
       }
     );
+
+    observerAbout.observe(aboutSection);
   }
 
   // Animation pour la section testimonial
@@ -132,21 +215,29 @@ export function animateAbout() {
   const testimonialSection = document.querySelector('.section_testimonial');
 
   if (testimonialContent && testimonialSection) {
-    gsap.fromTo(
-      testimonialContent,
-      { opacity: 0, y: 50 },
+    const observerTestimonial = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(
+              testimonialContent,
+              { opacity: 0, y: 50 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power3.out',
+              }
+            );
+          }
+        });
+      },
       {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: testimonialSection,
-          start: 'top 60%',
-          toggleActions: 'play none none reverse',
-        },
+        threshold: 0.2,
       }
     );
+
+    observerTestimonial.observe(testimonialSection);
   }
 }
 
@@ -154,23 +245,31 @@ export function animateCTA() {
   const ctaSection = document.querySelector('.section_cta');
 
   if (ctaSection) {
-    gsap.fromTo(
-      ctaSection,
-      {
-        opacity: 0,
-        x: 400,
+    const observerCTA = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.fromTo(
+              ctaSection,
+              {
+                opacity: 0,
+                x: 400,
+              },
+              {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                ease: 'power3.out',
+              }
+            );
+          }
+        });
       },
       {
-        opacity: 1,
-        x: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: ctaSection,
-          start: 'top 60%',
-          toggleActions: 'play none none reverse',
-        },
+        threshold: 0.2,
       }
     );
+
+    observerCTA.observe(ctaSection);
   }
 }

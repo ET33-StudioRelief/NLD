@@ -5,7 +5,9 @@ import {
   animateCTA,
   animateFeatures,
   animateHeroGrid,
+  animateHeroIntro,
   animateNavbar,
+  initFadeInOnScroll,
 } from './animation';
 
 window.onload = () => {
@@ -14,4 +16,6 @@ window.onload = () => {
   animateFeatures();
   animateAbout();
   animateCTA();
+  initFadeInOnScroll();
+  animateHeroIntro();
 };

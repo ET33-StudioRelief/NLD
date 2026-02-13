@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": [],
-  "sourcesContent": [],
-  "mappings": "",
+  "sources": ["../src/index.css"],
+  "sourcesContent": ["/* Fade-in on scroll for elements with trigger=\"fade-in\" */\n[trigger='fade-in'] {\n  opacity: 0;\n  transform: translateY(10px);\n}\n\n[trigger='fade-in'].is-in-view {\n  animation: fade-in-up 0.6s ease-out forwards;\n}\n\n@keyframes fade-in-up {\n  from {\n    opacity: 0;\n    transform: translateY(10px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n"],
+  "mappings": ";AACA,CAAC;AACC,WAAS;AACT,aAAW,WAAW;AACxB;AAEA,CAAC,gBAAkB,CAAC;AAClB,aAAW,WAAW,KAAK,SAAS;AACtC;AAEA,WAHa;AAIX;AACE,aAAS;AACT,eAAW,WAAW;AACxB;AACA;AACE,aAAS;AACT,eAAW,WAAW;AACxB;AACF;",
   "names": []
 }
