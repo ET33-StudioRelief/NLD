@@ -1,4 +1,7 @@
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // CSS fade-in (trigger="fade-in") when entering viewport
 export function initFadeInOnScroll() {
@@ -239,4 +242,60 @@ export function animateAbout() {
 
     observerTestimonial.observe(testimonialSection);
   }
+}
+
+export function initFeaturesCards() {
+  const cards = document.querySelectorAll<HTMLElement>('.features_grid .features_card');
+
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    const description = card.querySelector<HTMLElement>('.features_card_description-wrap');
+
+    if (!description) return;
+    if (card.dataset.featuresCardInit === 'true') return;
+
+    card.dataset.featuresCardInit = 'true';
+
+    gsap.set(description, {
+      height: 0,
+      opacity: 0,
+      overflow: 'hidden',
+      willChange: 'height, opacity',
+    });
+
+    card.addEventListener('mouseenter', () => {
+      gsap.to(description, {
+        height: 'auto',
+        duration: 0.45,
+        ease: 'power2.out',
+        overwrite: true,
+      });
+
+      gsap.to(description, {
+        opacity: 1,
+        duration: 0.3,
+        delay: 0.06,
+        ease: 'power1.out',
+        overwrite: 'auto',
+      });
+    });
+
+    card.addEventListener('mouseleave', () => {
+      gsap.to(description, {
+        height: 0,
+        duration: 0.35,
+        ease: 'power2.inOut',
+        overwrite: true,
+      });
+
+      gsap.to(description, {
+        opacity: 0,
+        duration: 0.2,
+        delay: 0.05,
+        ease: 'power1.in',
+        overwrite: 'auto',
+      });
+    });
+  });
 }

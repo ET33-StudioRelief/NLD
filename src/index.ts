@@ -1,5 +1,7 @@
 import './index.css';
 
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 import {
   animateAbout,
   animateFeatures,
@@ -7,6 +9,7 @@ import {
   animateHeroIntro,
   animateNavbar,
   initFadeInOnScroll,
+  initFeaturesCards,
 } from './animation';
 
 window.Webflow ||= [];
@@ -15,6 +18,8 @@ window.Webflow.push(() => {
   animateNavbar();
   animateFeatures();
   animateAbout();
+  initFeaturesCards();
   initFadeInOnScroll();
   animateHeroIntro();
+  requestAnimationFrame(() => ScrollTrigger.refresh());
 });
